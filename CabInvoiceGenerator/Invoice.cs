@@ -40,5 +40,14 @@ namespace CabInvoiceGenerator
             Console.WriteLine("Total Fare : " + GetAggregate());
             Console.WriteLine("Average Fare per Ride : " + GetAverage());
         }
+
+        public override bool Equals(object obj)
+        {
+            Invoice other = (Invoice)obj;
+            foreach(Ride ride in rides)
+                if (!other.rides.Contains(ride))
+                    return false;
+            return true;
+        }
     }
 }

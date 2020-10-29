@@ -55,5 +55,27 @@ namespace NUnitTestProject1
             Assert.AreEqual(43.666666666666666, invoice.GetAverage());
             Assert.AreEqual(3, invoice.NumberOfRides());
         }
+
+        [Test]
+        public void Test4()
+        {
+            Ride ride1 = new Ride(2, 3);
+            Ride ride2 = new Ride(4, 8);
+            Ride ride3 = new Ride(5, 10);
+
+            Invoice invoice = new Invoice();
+            invoice.AddRide(ride1);
+            invoice.AddRide(ride2);
+            invoice.AddRide(ride3);
+
+            RideRepository rr = new RideRepository();
+
+            rr.NewRide(ride1,"User 1");
+            rr.NewRide(ride2,"User 1");
+            rr.NewRide(ride3,"User 1");
+            Invoice invoice1 = rr.GetInvoice("User 1");
+
+            Assert.IsTrue(invoice.Equals(invoice1));
+        }
     }
 }
