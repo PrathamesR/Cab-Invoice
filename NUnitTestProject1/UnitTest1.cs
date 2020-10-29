@@ -17,7 +17,7 @@ namespace NUnitTestProject1
             double distance = 1.3;
             double time = 2;
 
-            Ride ride = new Ride(distance,time);
+            Ride ride = new Ride(distance,time,Ride.Type.NORMAL);
             double fare = ride.CalculateFare();
 
             Assert.AreEqual(expected, fare);
@@ -26,9 +26,9 @@ namespace NUnitTestProject1
         [Test]
         public void Test2()
         {
-            Ride ride1 = new Ride(2, 3);
-            Ride ride2 = new Ride(4, 8);
-            Ride ride3 = new Ride(5, 10);
+            Ride ride1 = new Ride(2, 3, Ride.Type.NORMAL);
+            Ride ride2 = new Ride(4, 8, Ride.Type.NORMAL);
+            Ride ride3 = new Ride(5, 10, Ride.Type.NORMAL);
             double expected = 131;
             Invoice invoice = new Invoice();
             invoice.AddRide(ride1);
@@ -42,9 +42,9 @@ namespace NUnitTestProject1
         [Test]
         public void Test3()
         {
-            Ride ride1 = new Ride(2, 3);
-            Ride ride2 = new Ride(4, 8);
-            Ride ride3 = new Ride(5, 10);
+            Ride ride1 = new Ride(2, 3, Ride.Type.NORMAL);
+            Ride ride2 = new Ride(4, 8, Ride.Type.NORMAL);
+            Ride ride3 = new Ride(5, 10, Ride.Type.NORMAL);
 
             Invoice invoice = new Invoice();
             invoice.AddRide(ride1);
@@ -59,9 +59,9 @@ namespace NUnitTestProject1
         [Test]
         public void Test4()
         {
-            Ride ride1 = new Ride(2, 3);
-            Ride ride2 = new Ride(4, 8);
-            Ride ride3 = new Ride(5, 10);
+            Ride ride1 = new Ride(2, 3, Ride.Type.NORMAL);
+            Ride ride2 = new Ride(4, 8, Ride.Type.NORMAL);
+            Ride ride3 = new Ride(5, 10, Ride.Type.NORMAL); 
 
             Invoice invoice = new Invoice();
             invoice.AddRide(ride1);
@@ -76,6 +76,27 @@ namespace NUnitTestProject1
             Invoice invoice1 = rr.GetInvoice("User 1");
 
             Assert.IsTrue(invoice.Equals(invoice1));
+        }
+
+        [Test]
+        public void Test5()
+        {
+            double expected = 15;
+            double distance = 1.3;
+            double time = 2;
+
+            double expected2 = 23.5;
+            double distance2 = 1.3;
+            double time2 = 2;
+
+
+            Ride ride = new Ride(distance, time, Ride.Type.NORMAL);
+            double fare = ride.CalculateFare();
+            Ride ride2 = new Ride(distance2, time2, Ride.Type.PREMIUM);
+            double fare2 = ride2.CalculateFare();
+
+            Assert.AreEqual(expected, fare);
+            Assert.AreEqual(expected2, fare2);
         }
     }
 }

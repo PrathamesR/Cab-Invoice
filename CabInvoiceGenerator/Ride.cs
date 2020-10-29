@@ -10,17 +10,31 @@ namespace CabInvoiceGenerator
     {
         double distance;
         double time;
+        Type type;
 
-        public Ride(double distance,double time)
+        public enum Type { NORMAL, PREMIUM}
+
+        public Ride(double distance,double time, Type type)
         {
             this.distance=distance;
             this.time = time;
+            this.type = type;
         }
 
         public double CalculateFare()
         {
-            double cost = 10 * distance + time;
-            return cost>5?cost:5;
+            if (type == Type.NORMAL)
+            {
+                double cost = 10 * distance + time;
+                return cost > 5 ? cost : 5;
+            }
+            else if (type == Type.PREMIUM)
+            {
+                double cost = 15 * distance + 2 * time;
+                return cost > 20 ? cost : 20;
+            }
+            else
+                return 0;
         }
     }
 }
