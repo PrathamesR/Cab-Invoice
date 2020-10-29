@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CabInvoiceGenerator
 {
-    class Invoice
+    public class Invoice
     {
         List<Ride> rides = new List<Ride>();
 
@@ -15,17 +15,30 @@ namespace CabInvoiceGenerator
             rides.Add(ride);
         }
 
+        public double GetAggregate()
+        {
+            double total = 0;
+            foreach (Ride ride in rides)
+                total += ride.CalculateFare();
+
+            return total;
+        }
+
+        public int NumberOfRides()
+        {
+            return rides.Count;
+        }
+
+        public double GetAverage()
+        {
+            return GetAggregate() / rides.Count;
+        }
+
         public void DisplayInvoice()
         {
             Console.WriteLine("Total number of Rides : "+rides.Count);
-
-            double total=0;
-            foreach(Ride ride in rides)
-                total += ride.CalculateFare();
-
-            Console.WriteLine("Total Fare : " + total);
-
-            Console.WriteLine("Average Fare per Ride : " + total / rides.Count);
+            Console.WriteLine("Total Fare : " + GetAggregate());
+            Console.WriteLine("Average Fare per Ride : " + GetAverage());
         }
     }
 }
